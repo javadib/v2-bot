@@ -1,0 +1,135 @@
+{
+  "name": "Product",
+  "base": "BaseModel",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "ReadOnly2": {
+      "payablePrice": true
+    }
+  },
+  "mixins": {
+    "Activation": {},
+    "Upload2": [
+      {
+        "methodName": ["create", "prototype.patchAttributes"],
+        "storage": "storage",
+        "model": "Product",
+        "value": "{default}",
+        "renameTo": "@hash",
+        "fields": {
+          "images": {
+            "isArray": true
+          }
+        }
+      }
+    ],
+    "FullUrl": {
+      "appSettingsKey": "baseUrl",
+      "fields": {
+        "images": {
+          "isArray": true
+        }
+      }
+    },
+    "ReadOnly2": {
+      "remoteMethods": true
+    },
+    "RemoteMethod": {
+      "disable": {
+        "relations": {
+          "orderDetails": ["write", "delete"]
+        }
+      }
+    },
+    "UniqueHandle": {
+      "create": {
+        "modelName": "Product",
+        "keyName": "کد"
+      }
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "length":255,
+      "required": {
+        "message": "error.model.prop.required"
+      },
+      "index": true
+    },
+    "code": {
+      "type": "string",
+      "length":100,
+      "required": {
+        "message": "error.model.prop.required"
+      },
+      "index": {
+        "unique": true
+      }
+    },
+    "stock": {
+      "type": "number",
+      "required": false,
+      "default": 1
+    },
+    "totalPrice": {
+      "type": "number",
+      "required": {
+        "message": "error.model.prop.required"
+      }
+    },
+    "discountedPrice": {
+      "type": "number",
+      "required": false
+    },
+    "images": {
+      "type": ["string"],
+      "required": false,
+      "default": ["/images/default_product.png"],
+      "length":255,
+      "dataType": "longtext"
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "payablePrice": {
+      "type": "number",
+      "required": false,
+      "description": "Computed Property"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "store": {
+      "type": "belongsTo",
+      "model": "Store",
+      "foreignKey": "storeId"
+    },
+    "cats": {
+      "type": "referencesMany",
+      "model": "ProductCategory",
+      "foreignKey": "catIds",
+      "options": {
+        "validate": true,
+        "forceId": false
+      }
+    },
+    "orderDetails": {
+      "type": "hasMany",
+      "model": "OrderDetail",
+      "foreignKey": "productId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}
