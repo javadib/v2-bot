@@ -83,7 +83,85 @@
     "$promise": {},
     "$resolved": true
   },
-  "Vendor": {
+  "Faq": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "FaqCategory": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Invoice": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Message": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Order": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "OrderDetail": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "PayGateway": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Payment": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Product": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "ProductCategory": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Store": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "StoreCategory": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Ticket": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "TicketReply": {
     "dataSource": "db",
     "public": false,
     "$promise": {},
