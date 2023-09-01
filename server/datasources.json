@@ -1,0 +1,24 @@
+{
+  "mem": {
+    "name": "mem",
+    "connector": "memory"
+  },
+  "db": {
+    "name": "db",
+    "host": "127.0.0.1",
+    "port": 27017,
+    "database": "xBot",
+    "poolSize": 10,
+    "bufferMaxEntries": 0,
+    "useNewUrlParser": true,
+    "useUnifiedTopology": true,
+    "connector": "mongodb"
+  },
+  "media": {
+    "name": "media",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "./server/public/media",
+    "relativeRoot": "/media"
+  }
+}

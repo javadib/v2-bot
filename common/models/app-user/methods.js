@@ -4,7 +4,7 @@ const util = require('util');
 const _ = require('lodash');
 const async = require('async');
 
-const error = require('../../../loopbacker/src/common/utils/error-provider');
+const error = require('../../../loopbacker/common/utils/error-provider');
 
 module.exports = (AppUser) => {
   const MY_NOTIFY_EVENT = 'myNotification';

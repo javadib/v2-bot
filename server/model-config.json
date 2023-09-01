@@ -1,0 +1,170 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "../common/models/params",
+      "../loopbacker/common/models",
+      "../loopbacker/common/models/params",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../loopbacker/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db",
+    "public": false
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Credential": {
+    "dataSource": "db",
+    "public": false
+  },
+  "AppOrg": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "AppPublisher": {
+    "dataSource": "db",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "AppUser": {
+    "dataSource": "db",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "AppSetting": {
+    "dataSource": "db",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Command": {
+    "dataSource": "db",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "SocialUser": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "SocialSession": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Faq": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "FaqCategory": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Invoice": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Message": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Order": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "OrderDetail": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "PayGateway": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Payment": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Product": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "ProductCategory": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Store": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "StoreCategory": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Ticket": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "TicketReply": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  }
+}
