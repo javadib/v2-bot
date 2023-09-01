@@ -1,0 +1,38 @@
+{
+  "name": "AppOrg",
+  "base": "Organization",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "ReadOnly2": {
+      "remoteMethods": false
+    },
+    "Metadata": {
+      "properties": "*",
+      "logger": true
+    }
+  },
+  "hidden": [],
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "index": {
+        "unique": true
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "users": {
+      "type": "hasMany",
+      "model": "AppUser",
+      "foreignKey": "organizationId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

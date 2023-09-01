@@ -1,0 +1,135 @@
+{
+  "name": "AppSetting",
+  "base": "BaseModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true,
+    "logActivate": false
+  },
+  "mixins": {
+    "Aggregation": {},
+    "ReadOnly2": {
+      "remoteMethods": false
+    },
+    "Validation": {}
+  },
+  "hidden": [],
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "code": {
+      "type": "string",
+      "required": true,
+      "index": {
+        "unique": true
+      },
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "type": {
+      "type": "string",
+      "required": false,
+      "default": "string",
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "dropdown"
+        }
+      }
+    },
+    "required": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "checked"
+        }
+      }
+    },
+    "value": {
+      "type": "any",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "defaultValue": {
+      "type": "any",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "className": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "placeholder": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "priority": {
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "number"
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    }
+  },
+  "scope": {
+    "order": {
+      "priority": 1
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

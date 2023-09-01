@@ -1,0 +1,53 @@
+{
+  "name": "Seed Setting",
+  "data": [
+    {
+      "model": {
+        "name": "Login Attempt",
+        "code": "app.login.attempt",
+        "type": "number",
+        "required": true,
+        "value": 3,
+        "defaultValue": 3,
+        "className": "zmdi zmdi-alert-triangle",
+        "placeholder": "",
+        "priority": 0,
+        "description": ""
+      },
+      "catCode": "models.setting.general"
+    },
+    {
+      "model": {
+        "name": "Block Seconds",
+        "code": "app.login.block",
+        "type": "number",
+        "required": true,
+        "value": 120,
+        "defaultValue": 120,
+        "group": "User Security",
+        "className": "zmdi zmdi-block",
+        "groupClassName": "zmdi zmdi-shield-check",
+        "placeholder": "Block user in seconds",
+        "priority": 0,
+        "description": ""
+      },
+      "roleName": "admin"
+    },
+    {
+      "model": {
+        "name": "App Name",
+        "code": "app.name",
+        "type": "string",
+        "required": true,
+        "defaultValue": "xBot Dashboard Application",
+        "group": "General",
+        "className": "",
+        "groupClassName": "zmdi zmdi-font",
+        "placeholder": "Application name",
+        "priority": 0,
+        "description": ""
+      },
+      "roleName": "admin"
+    }
+  ]
+}

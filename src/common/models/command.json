@@ -1,0 +1,157 @@
+{
+  "name": "Command",
+  "base": "BaseModel",
+  "strict": true,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true,
+    "logActivate": false
+  },
+  "mixins": {
+    "Aggregation": {},
+    "ReadOnly2": {
+      "remoteMethods": false
+    },
+    "Validation": {}
+  },
+  "hidden": [],
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true,
+      "required": true,
+      "display": {
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "name": {
+      "type": "string",
+      "required": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "code": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "body": {
+      "type": "string",
+      "required": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "successText": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "helpText": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "postFunc": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "priority": {
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "number"
+        }
+      }
+    },
+    "firstCommand": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "number"
+        }
+      }
+    },
+    "lastCommand": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "number"
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    }
+  },
+  "scope": {
+    "order": "priority ACS"
+  },
+  "validations": [],
+  "relations": {
+    "next": {
+      "type": "hasOne",
+      "model": "Command",
+      "foreignKey": "prevId"
+    },
+    "prev": {
+      "type": "hasOne",
+      "model": "Command",
+      "foreignKey": "nextId"
+    },
+    "socialUsers": {
+      "type": "hasMany",
+      "model": "SocialUser",
+      "foreignKey": "lastCommand"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

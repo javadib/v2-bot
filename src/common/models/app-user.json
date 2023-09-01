@@ -1,0 +1,302 @@
+{
+  "name": "AppUser",
+  "base": "BaseUser",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "ttl": 1800000,
+    "allowEternalTokens": true,
+    "validateUpsert": true,
+    "emailVerificationRequired": false,
+    "caseSensitiveEmail": false,
+    "resolveGmailAccount": true,
+    "activationEmail": false,
+    "autoMigrate": true,
+    "logActivate": false,
+    "aclOption": true
+  },
+  "hidden": [
+    "email",
+    "emailVerified",
+    "realm",
+    "credentials",
+    "challenges",
+    "status",
+    "created",
+    "organizationId",
+    "lastUpdated"
+  ],
+  "mixins": {
+    "ExtensionMethod": {},
+    "Aggregation": {},
+    "Activation": {},
+    "Upload": [
+      {
+        "methodName": "prototype.buildAgent",
+        "storage": "agents",
+        "fields": ["bindApkUrl"],
+        "options": {
+          "renameTo": "@hash"
+        }
+      }
+    ],
+    "Tracking": true,
+    "ReadOnly2": {
+      "id": true,
+      "isActive": true,
+      "mobileVerified": true,
+      "isSystem": true
+    },
+    "RemoteMethod": {
+      "disable": {
+        "list": [],
+        "regExp": null,
+        "relations": {
+          "accessTokens": "*",
+          "roles": "*",
+          "roleMappings": "*"
+        }
+      }
+    },
+    "Metadata": {
+      "properties": "*",
+      "logger": true
+    },
+    "Pagination": {
+      "header": {
+        "mapping": {
+          "name": "title",
+          "autoGenerateFilter": "filter"
+        },
+        "excludeHidden": true,
+        "excludeList": [
+          "organizationId"
+        ]
+      },
+      "relations": {}
+    },
+    "Crud": {
+      "appSettingsKey": "baseUrl",
+      "header": {
+        "mapping": {
+          "name": "title",
+          "description": "placeholder",
+          "autoGenerateFilter": "filter"
+        }
+      },
+      "c": {
+        "title.id": "app.model.new",
+        "title": "افزودن",
+        "subtitle": null,
+        "endpoint": {
+          "url": "/AppUsers",
+          "method": "POST",
+          "type": "application/json"
+        }
+      },
+      "u": {
+        "title.id": "app.model.update",
+        "title": "ویرایش",
+        "subtitle": null,
+        "endpoint": {
+          "url": "/AppUsers/{id}",
+          "method": "PATCH",
+          "type": "application/json"
+        }
+      },
+      "d": {
+        "title.id": "app.popup.title",
+        "confirm.id": "app.popup.confirm",
+        "title": "Delete Item?",
+        "confirm": "Are you sure to delete?\nItem cannot be recover after deleted."
+      },
+      "logger": true
+    },
+    "Systematic": {
+      "mapper": {
+        "system": "isSystem"
+      },
+      "canUpdate": false,
+      "canDelete": false,
+      "hidden": true
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true,
+      "generated": true,
+      "display": {
+        "name": "ID",
+        "autoGenerateField": false,
+        "autoGenerateFilter": null,
+        "description": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "ID"
+      }
+    },
+    "firstName": {
+      "type": "string",
+      "required": true,
+      "crud": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "lastName": {
+      "type": "string",
+      "required": false,
+      "crud": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "username": {
+      "type": "string",
+      "required": false,
+      "crud": {"c":  true, "u": false},
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "email": {
+      "type": "string",
+      "display": {
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "logActivate": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "display": {
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "checked"
+        }
+      }
+    },
+    "mobileVerified": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "checkbox"
+        }
+      }
+    },
+    "isActive": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "dropdown"
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "org": {
+      "type": "belongsTo",
+      "model": "AppOrg",
+      "foreignKey": "organizationId"
+    },
+    "accessTokens": {
+      "type": "hasMany",
+      "model": "AccessToken",
+      "foreignKey": "userId"
+    },
+    "socialUser": {
+      "type": "hasMany",
+      "model": "SocialUser",
+      "foreignKey": "userId"
+    },
+    "notifications": {
+      "type": "hasMany",
+      "model": "AppNotification",
+      "foreignKey": "receiverUserId"
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": [
+        "authenticate",
+        "requestCode",
+        "loginWithCode"
+      ]
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "manager",
+      "permission": "ALLOW",
+      "property": [
+        "prototype.__createUser__",
+        "__createUser__",
+        "createUser"
+      ]
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": [
+        "crud",
+        "buildAgent",
+        "prototype.buildAgent",
+        "__updateById__roleMappings",
+        "__updateById__roles",
+        "__link__roles"
+      ]
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "manager",
+      "permission": "ALLOW"
+    }
+  ],
+  "scope": {},
+  "scopes": {
+    "actives": {
+      "where": {
+        "isActive": true
+      }
+    }
+  },
+  "methods": {}
+}

@@ -1,0 +1,127 @@
+{
+  "name": "SocialSession",
+  "base": "BaseModel",
+  "strict": true,
+  "idInjection": false,
+  "options": {
+    "allowEternalTokens": true,
+    "validateUpsert": true,
+    "autoMigrate": true,
+    "logActivate": false,
+    "aclOption": true
+  },
+  "hidden": [],
+  "mixins": {
+    "ExtensionMethod": {},
+    "Aggregation": {},
+    "Tracking": true,
+    "ReadOnly2": {
+      "id": true,
+      "isActive": true,
+      "mobileVerified": true
+    },
+    "RemoteMethod": {
+      "disable": {
+        "list": [],
+        "regExp": null,
+        "relations": {
+          "accessTokens": "*",
+          "roles": "*",
+          "roleMappings": "*"
+        }
+      }
+    },
+    "Metadata": {
+      "properties": "*",
+      "logger": true
+    },
+    "Pagination": {
+      "header": {
+        "mapping": {
+          "name": "title",
+          "autoGenerateFilter": "filter"
+        },
+        "excludeHidden": true,
+        "excludeList": [
+          "organizationId"
+        ]
+      },
+      "relations": {}
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true,
+      "required": true,
+      "display": {
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "params": {
+      "type": "array",
+      "required": false,
+      "default": [],
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "username": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "socialUserId": {
+      "type": "string",
+      "required": true,
+      "index": {"unique": true},
+      "crud": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "lastCommand": {
+      "type": "string",
+      "required": false,
+      "crud": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "command": {
+      "type": "belongsTo",
+      "model": "Command",
+      "foreignKey": "lastCommand"
+    }
+  },
+  "acls": [],
+  "scope": {},
+  "scopes": {
+    "actives": {
+      "where": {
+        "isActive": true
+      }
+    }
+  },
+  "methods": {}
+}

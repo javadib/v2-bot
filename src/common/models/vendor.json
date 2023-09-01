@@ -1,0 +1,127 @@
+{
+  "name": "Vendor",
+  "base": "BaseModel",
+  "strict": true,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true,
+    "logActivate": false
+  },
+  "mixins": {
+    "Aggregation": {},
+    "ReadOnly2": {
+      "remoteMethods": false
+    },
+    "Validation": {}
+  },
+  "hidden": [],
+  "properties": {
+    "tId": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "url": {
+      "type": "string",
+      "required": true,
+      "index": {"unique": true},
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "LogoUrl": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "priority": {
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "number"
+        }
+      }
+    },
+    "tBlocked": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "number"
+        }
+      }
+    },
+    "isMarketplace": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "number"
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    }
+  },
+  "scope": {
+    "order": "priority ACS"
+  },
+  "validations": [],
+  "relations": {
+    "next": {
+      "type": "hasOne",
+      "model": "Command",
+      "foreignKey": "prevId"
+    },
+    "prev": {
+      "type": "hasOne",
+      "model": "Command",
+      "foreignKey": "nextId"
+    },
+    "socialUsers": {
+      "type": "hasMany",
+      "model": "SocialUser",
+      "foreignKey": "lastCommand"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

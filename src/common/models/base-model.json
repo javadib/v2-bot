@@ -1,0 +1,110 @@
+{
+  "name": "BaseModel",
+  "base": "PersistedModel",
+  "strict": true,
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true,
+    "autoMigrate": true,
+    "logActivate": true
+  },
+  "mixins": {
+    "Tracking": true,
+    "Default": true,
+    "MetaToMethod": true
+  },
+  "protected": [],
+  "hidden": [],
+  "properties": {
+    "id": {
+      "type": "string",
+      "id": true,
+      "generated": true,
+      "display": {
+        "name": "ID",
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "ID"
+      }
+    },
+    "createdOn": {
+      "type": "date",
+      "required": false,
+      "default": "$now",
+      "display": {
+        "name": "createdOn",
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "createdOn"
+      }
+    },
+    "createdBy": {
+      "type": "string",
+      "display": {
+        "name": "createdBy",
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "createdBy"
+      }
+    },
+    "lastModifiedOn": {
+      "type": "date",
+      "display": {
+        "name": "lastModifiedOn",
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "lastModifiedOn"
+      }
+    },
+    "lastModifiedBy": {
+      "type": "string",
+      "display": {
+        "name": "lastModifiedBy",
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "lastModifiedBy"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+
+  ],
+  "methods": {}
+}

@@ -1,0 +1,17 @@
+{
+  "name": "seed_user",
+  "data": [
+    {
+      "model": {
+        "firstName": "system",
+        "lastName": "admin",
+        "username": "admin",
+        "password": "admin123QWE",
+        "isActive": true,
+        "logActivate": false,
+        "isSystem": true
+      },
+      "roleName": "admin"
+    }
+  ]
+}

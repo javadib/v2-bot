@@ -1,0 +1,155 @@
+{
+  "name": "SocialUser",
+  "base": "BaseModel",
+  "strict": true,
+  "idInjection": false,
+  "options": {
+    "allowEternalTokens": true,
+    "validateUpsert": true,
+    "autoMigrate": true,
+    "logActivate": false,
+    "aclOption": true
+  },
+  "hidden": [],
+  "mixins": {
+    "ExtensionMethod": {},
+    "Aggregation": {},
+    "Tracking": true,
+    "ReadOnly2": {
+      "id": true,
+      "isActive": true,
+      "mobileVerified": true
+    },
+    "RemoteMethod": {
+      "disable": {
+        "list": [],
+        "regExp": null,
+        "relations": {
+          "accessTokens": "*",
+          "roles": "*",
+          "roleMappings": "*"
+        }
+      }
+    },
+    "Metadata": {
+      "properties": "*",
+      "logger": true
+    },
+    "Pagination": {
+      "header": {
+        "mapping": {
+          "name": "title",
+          "autoGenerateFilter": "filter"
+        },
+        "excludeHidden": true,
+        "excludeList": [
+          "organizationId"
+        ]
+      },
+      "relations": {}
+    }
+  },
+  "properties": {
+    "firstName": {
+      "type": "string",
+      "required": true,
+      "crud": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "lastName": {
+      "type": "string",
+      "required": false,
+      "crud": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "username": {
+      "type": "string",
+      "required": false,
+      "crud": {"c":  true, "u": false},
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "userId": {
+      "type": "string",
+      "required": true,
+      "index": {"unique": true},
+      "crud": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "lastCommand": {
+      "type": "string",
+      "required": false,
+      "crud": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "igVerified": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "checkbox"
+        }
+      }
+    },
+    "mobileVerified": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "checkbox"
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "command": {
+      "type": "belongsTo",
+      "model": "Command",
+      "foreignKey": "lastCommand"
+    },
+    "session": {
+      "type": "hasOne",
+      "model": "SocialSession",
+      "foreignKey": "socialUserId"
+    }
+  },
+  "acls": [],
+  "scope": {},
+  "scopes": {
+    "actives": {
+      "where": {
+        "isActive": true
+      }
+    }
+  },
+  "methods": {}
+}

@@ -1,0 +1,349 @@
+{
+  "name": "AppPublisher",
+  "base": "BaseModel",
+  "strict": true,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true,
+    "logActivate": false
+  },
+  "mixins": {
+    "Activation": {},
+    "ReadOnly": {
+      "isPay": true,
+      "payTypeTitle": true,
+      "payMethodTitle": true,
+      "createdOnFA": true,
+      "totalPriceTitle": true
+    }
+  },
+  "hidden": [
+    "code",
+    "isActive",
+    "testMode",
+    "apiToken",
+    "username",
+    "password",
+    "testApiToken",
+    "moduleFileName"
+  ],
+  "scope": {
+    "where": {
+      "isActive": true
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "index": {
+        "unique": true
+      },
+      "display": {
+        "name": "name",
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "name"
+      }
+    },
+    "key": {
+      "type": "string",
+      "required": true,
+      "index": {
+        "unique": true
+      },
+      "display": {
+        "name": "key",
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "key"
+      }
+    },
+    "type": {
+      "type": "string",
+      "required": false,
+      "default": "sms",
+      "enum": [
+        "sms",
+        "email",
+        "push"
+      ],
+      "display": {
+        "name": "type",
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "dropdown"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "type"
+      }
+    },
+    "username": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "name": "username",
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "username"
+      }
+    },
+    "password": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "name": "password",
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "password"
+      }
+    },
+    "sender": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "name": "sender",
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "dropdown"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "sender"
+      }
+    },
+    "apiToken": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "name": "apiToken",
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "apiToken"
+      }
+    },
+    "testApiToken": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "name": "testApiToken",
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "testApiToken"
+      }
+    },
+    "moduleUrl": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "name": "moduleUrl",
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "moduleUrl"
+      }
+    },
+    "modulePort": {
+      "type": "number",
+      "required": false,
+      "display": {
+        "name": "Module Port",
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "number"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "ModulePort"
+      }
+    },
+    "moduleFileName": {
+      "type": "string",
+      "required": true,
+      "display": {
+        "name": "moduleFileName",
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "moduleFileName"
+      }
+    },
+    "iconUrl": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "name": "iconUrl",
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "image"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "iconUrl"
+      }
+    },
+    "className": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "name": "Class Name",
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "image"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "className"
+      }
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "name": "description",
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "description"
+      }
+    },
+    "testMode": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "display": {
+        "name": "testMode",
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "checked"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "testMode"
+      }
+    },
+    "isActive": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "display": {
+        "name": "isActive",
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "checked"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "isActive"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "details": {
+      "type": "hasMany",
+      "model": "PublishDetail",
+      "foreignKey": "publisherId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
