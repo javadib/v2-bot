@@ -1,0 +1,161 @@
+{
+  "name": "ProductCategory",
+  "base": "BaseModel",
+  "strict": true,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Activation": {},
+    "Upload2": [
+      {
+        "methodName": ["create", "prototype.patchAttributes"],
+        "storage": "storage",
+        "model": "ProductCategory",
+        "value": "{default}",
+        "renameTo": "@hash",
+        "fields": {
+          "indexImage":  true,
+          "iconUrl": true
+        }
+      }
+    ],
+    "RemoteMethod": {
+      "disable": {
+        "relations": {
+          "products": ["write", "delete"]
+        }
+      }
+    },
+    "FullUrl": {
+      "appSettingsKey": "baseUrl",
+      "fields": {
+        "indexImage": true,
+        "iconUrl": true
+      }
+    },
+    "UniqueHandle": {
+      "create": {
+        "modelName": "ProductCategory",
+        "keyName": "دسته بندی"
+      },
+      "__create__products": {
+        "modelName": "Product",
+        "keyName": "کد"
+      }
+    }
+  },
+  "hidden": ["catIds"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "displayName": "نام",
+      "required": true,
+      "index": {
+        "unique": true
+      },
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "displayName": "توضیحات",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "iconClass": {
+      "type": "string",
+      "displayName": "آیکون",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "iconUrl": {
+      "type": "string",
+      "displayName": "آیکون شاخص",
+      "required": false,
+      "default": "/images/lbc/default.png",
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "indexImage": {
+      "type": "string",
+      "displayName": "تصویر شاخص",
+      "required": false,
+      "default": "/images/productCategory.png",
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "headerImage": {
+      "type": "string",
+      "displayName": "تصویر سربرگ",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "isActive": {
+      "type": "boolean",
+      "displayName": "فعال شده",
+      "default": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "parent": {
+      "type": "belongsTo",
+      "model": "ProductCategory",
+      "foreignKey": "parentId"
+    },
+    "childes": {
+      "type": "hasMany",
+      "model": "ProductCategory",
+      "foreignKey": "parentId"
+    },
+    "products": {
+      "type": "hasMany",
+      "model": "Product",
+      "foreignKey": "productCatId"
+    }
+  },
+  "acls": [],
+  "methods": {},
+  "scopes": {
+    "actives": {
+      "where": {
+        "isActive": true
+      }
+    }
+  }
+}

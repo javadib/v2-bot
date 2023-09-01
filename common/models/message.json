@@ -1,0 +1,113 @@
+{
+  "name": "Message",
+  "base": "BaseModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "ReadOnly": {
+      "isRead": true,
+      "readDate": true
+    },
+    "FullUrl": {
+      "baseUrl": "",
+      "appSettingsKey": "baseUrl",
+      "fields": {
+        "iconUrl": true
+      }
+    },
+    "Upload": [
+      {
+        "methodName": "uploadImage",
+        "storage": "storage",
+        "fields": ["iconUrl"],
+        "options": {
+          "renameTo": "@hash"
+        }
+      }
+    ]
+  },
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "trim": true,
+      "lowercase": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "code": {
+      "type": "string",
+      "required": true,
+      "trim": true,
+      "lowercase": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "type": {
+      "type": "string",
+      "required": false,
+      "default": "info",
+      "enum": [
+        "info",
+        "invite",
+        "payment",
+        "tournament"
+      ],
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "body": {
+      "type": "string",
+      "required": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "tags": {
+      "type": [
+        "string"
+      ],
+      "required": false,
+      "default": [],
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "array"
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": [
+        "read",
+        "SentMessages_id_read",
+        "SentMessage_updateModel_post_SentMessages_id_read"
+      ]
+    }
+  ],
+  "methods": {}
+}

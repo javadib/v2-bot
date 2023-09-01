@@ -1,0 +1,18 @@
+{
+  "name": "seed_user",
+  "data": [
+    {
+      "model": {
+        "title": "سفارش جذید",
+        "type": "invite",
+        "href": null,
+        "iconUrl": "/images/default-notify.png",
+        "via": "system",
+        "tags": [
+          "new_order"
+        ],
+        "body": "یک سفارش پرداخت شده در سامانه ثبت شده."
+      }
+    }
+  ]
+}

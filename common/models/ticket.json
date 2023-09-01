@@ -1,0 +1,104 @@
+{
+  "name": "Ticket",
+  "base": "BaseModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "ReadOnly": {
+      "lastStatus": true,
+      "lastStatusTitle": true,
+      "priorityTitle": true
+    },
+    "Metadata": {
+      "properties": "*",
+      "logger": true
+    },
+    "Pagination": {
+      "header": {
+        "mapping": {
+          "name": "title",
+          "autoGenerateFilter": "filter"
+        },
+        "excludeHidden": true,
+        "excludeList": []
+      },
+      "relations": {}
+    }
+  },
+  "scope": {
+    "order": "lastModifiedOn DESC"
+  },
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "priority": {
+      "type": "number",
+      "default": 1,
+      "enum": [
+        "low",
+        "middle",
+        "high",
+        "immediate"
+      ]
+    },
+    "lastStatus": {
+      "type": "number",
+      "default": 1,
+      "enum": [
+        "closed",
+        "waitForAnswer",
+        "expertRead",
+        "answered"
+      ]
+    },
+    "department": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "lastStatusTitle": {
+      "type": "string"
+    },
+    "priorityTitle": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "order": {
+      "type": "belongsTo",
+      "model": "Order",
+      "foreignKey": "orderId"
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "AppUser",
+      "foreignKey": "userId"
+    },
+    "store": {
+      "type": "belongsTo",
+      "model": "Store",
+      "foreignKey": "storeId"
+    },
+    "assignee": {
+      "type": "belongsTo",
+      "model": "AppUser",
+      "foreignKey": "expertId"
+    },
+    "comments": {
+      "type": "hasMany",
+      "model": "TicketReply",
+      "foreignKey": "ticketId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

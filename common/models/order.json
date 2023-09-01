@@ -1,0 +1,296 @@
+{
+  "name": "Order",
+  "base": "BaseModel",
+  "strict": true,
+  "idInjection": false,
+  "options": {
+    "enableExpiry": true,
+    "showOrderStatus": true,
+    "validateUpsert": true
+  },
+  "mixins": {
+    "ReadOnly2": {
+      "remoteMethods": true,
+      "address": true,
+      "trackingCode": true,
+      "discountPrice": true,
+      "discountPriceTitle": true,
+      "payablePrice": true,
+      "payablePriceTitle": true
+    },
+    "Computed2": {
+      "properties": {
+        "totalPriceTitle": "computeTotalPriceTitle",
+        "lastStatusTitle": "computeLastStatusTitle",
+        "discountPriceTitle": "computeDiscountPriceTitle",
+        "payablePriceTitle": "computePayablePriceTitle"
+      }
+    },
+    "Metadata": {
+      "properties": "*",
+      "logger": true
+    },
+    "Pagination": {
+      "header": {
+        "mapping": {
+          "name": "title",
+          "autoGenerateFilter": "filter"
+        },
+        "excludeHidden": true,
+        "excludeList": [
+          "userId",
+          "addressId",
+          "storeId",
+          "gatewayId"
+        ]
+      },
+      "relations": "*"
+    }
+  },
+  "hidden": [
+    "ua"
+  ],
+  "properties": {
+    "ua": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "totalPrice": {
+      "type": "number",
+      "required": true,
+      "display": {
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "number"
+        }
+      }
+    },
+    "discountPrice": {
+      "type": "number",
+      "default": 0,
+      "display": {
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "number"
+        }
+      }
+    },
+    "lastStatus": {
+      "type": "number",
+      "enum": [-1, 0, 1, 2, 3, 4],
+      "description": " \"canceled\" = -1, \"unpaid\" = 0, \"paid\" = 1, \"preparing\" = 2, \"sent\" = 3, \"delivered\" = 4. Enm ",
+      "default": 0,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "enum"
+        }
+      }
+    },
+    "address": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "trackingCode": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "payablePrice": {
+      "type": "number",
+      "default": 0,
+      "display": {
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "number"
+        }
+      }
+    },
+    "totalPriceTitle": {
+      "type": "string",
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "lastStatusTitle": {
+      "type": "string",
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "discountPriceTitle": {
+      "type": "string",
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "payablePriceTitle": {
+      "type": "string",
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "display": {
+        "autoGenerateField": false,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "userId": {
+      "required": true
+    },
+    "addressId": {
+      "required": true
+    },
+    "storeId": {
+      "required": true
+    }
+  },
+  "scope": {
+    "order": "createdOn DESC"
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "AppUser",
+      "foreignKey": "userId"
+    },
+    "store": {
+      "type": "belongsTo",
+      "model": "Store",
+      "foreignKey": "storeId"
+    },
+    "coupon": {
+      "type": "belongsTo",
+      "model": "Coupon",
+      "foreignKey": "couponId"
+    },
+    "gateway": {
+      "type": "belongsTo",
+      "model": "PayGateway",
+      "foreignKey": "gatewayId"
+    },
+    "address": {
+      "type": "belongsTo",
+      "model": "Address",
+      "foreignKey": "addressId"
+    },
+    "payments": {
+      "type": "hasMany",
+      "model": "Payment",
+      "foreignKey": "orderId"
+    },
+    "details": {
+      "type": "hasMany",
+      "model": "OrderDetail",
+      "foreignKey": "orderId"
+    },
+    "tickets": {
+      "type": "hasMany",
+      "model": "Ticket",
+      "foreignKey": "orderId"
+    }
+  },
+  "acls": [
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": [
+        "confirmPayment"
+      ]
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "supervisor",
+      "permission": "ALLOW",
+      "property": [
+        "__create__Payments",
+        "__create__Tickets"
+      ]
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "externalExpert",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "externalExpert",
+      "permission": "ALLOW",
+      "property": [
+        "__create__statuses",
+        "__create__Statuses",
+        "__create__orderStatuses",
+        "__create__OrderStatuses"
+      ]
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW",
+      "property": [
+        "__updateById__Tickets",
+        "shareText",
+        "applyCoupon",
+        "__applyCoupon"
+      ]
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "supervisor",
+      "permission": "ALLOW"
+    }
+  ],
+  "scopes": {
+    "views": {
+      "include": [
+        {
+          "relation": "details",
+          "scope": {
+            "include": "product"
+          }
+        }
+      ]
+    }
+  },
+  "methods": {}
+}

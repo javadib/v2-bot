@@ -1,0 +1,62 @@
+{
+  "name": "Faq",
+  "base": "BaseModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Activation": {},
+    "ReadOnly2": {
+      "remoteMethods": true
+    },
+    "UniqueHandle": {
+      "create": {
+        "modelName": "Faq",
+        "keyName": "عنوان"
+      }
+    }
+  },
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "index": {"unique":  true}
+    },
+    "categoryId": {
+      "type": "number",
+      "required": false
+    },
+    "body": {
+      "type": "string",
+      "required": true
+    },
+    "tags": {
+      "type": "string",
+      "required": false,
+      "default": []
+    },
+    "isActive": {
+      "type": "boolean",
+      "required": false,
+      "default": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "category": {
+      "type": "belongsTo",
+      "model": "FaqCategory",
+      "foreignKey": "categoryId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

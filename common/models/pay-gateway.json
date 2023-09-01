@@ -1,0 +1,251 @@
+{
+  "name": "PayGateway",
+  "base": "BaseModel",
+  "strict": true,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Activation": {},
+    "Upload2": [
+      {
+        "methodName": ["create", "prototype.patchAttributes"],
+        "storage": "storage",
+        "model": "PayGateway",
+        "value": "{default}",
+        "renameTo": "@hash",
+        "fields": {
+          "iconUrl": true
+        }
+      }
+    ],
+    "FullUrl": {
+      "appSettingsKey": "baseUrl",
+      "fields": {
+        "iconUrl":  true
+      }
+    },
+    "ReadOnly2": {},
+    "UniqueHandle": {
+      "create": {
+        "modelName": "PayGateway",
+        "keyName": "کد"
+      }
+    }
+  },
+  "hidden": [
+    "code",
+    "isActive",
+    "testMode",
+    "username",
+    "password",
+    "moduleFileName"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "display": {
+        "name": "name",
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "name"
+      }
+    },
+    "code": {
+      "type": "string",
+      "required": true,
+      "index": {
+        "unique": true
+      },
+      "display": {
+        "name": "code",
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "code"
+      }
+    },
+    "username": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "name": "username",
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "username"
+      }
+    },
+    "password": {
+      "type": "string",
+      "required": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false
+      }
+    },
+    "moduleFileName": {
+      "type": "string",
+      "required": true,
+      "display": {
+        "name": "moduleFileName",
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "moduleFileName"
+      }
+    },
+    "iconUrl": {
+      "type": "string",
+      "required": false,
+      "default": "images/default-gateway.png",
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "image"
+        }
+      }
+    },
+    "className": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "image"
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "required": false,
+      "display": {
+        "name": "description",
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "description"
+      }
+    },
+    "testMode": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "display": {
+        "name": "testMode",
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "checked"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "testMode"
+      }
+    },
+    "voucherBased": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "checked"
+        }
+      }
+    },
+    "isActive": {
+      "type": "boolean",
+      "required": false,
+      "default": false,
+      "display": {
+        "name": "isActive",
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "checked"
+        },
+        "description": "",
+        "placeholder": "",
+        "groupName": "main",
+        "order": 0,
+        "prompt": "",
+        "readonly": false,
+        "shortName": "isActive"
+      }
+    }
+  },
+  "scope": {
+    "where": {"isActive": true}
+  },
+  "validations": [],
+  "relations": {
+    "payments": {
+      "type": "hasMany",
+      "model": "Payment",
+      "foreignKey": "gatewayId"
+    },
+    "orders": {
+      "type": "hasMany",
+      "model": "Order",
+      "foreignKey": "gatewayId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

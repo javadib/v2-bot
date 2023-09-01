@@ -1,0 +1,75 @@
+{
+  "name": "Invoice",
+  "base": "BaseModel",
+  "strict": true,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "ReadOnly2": {
+      "remoteMethods": true
+    }
+  },
+  "properties": {
+    "uid": {
+      "type": "string",
+      "required": true
+    },
+    "totalPrice": {
+      "type": "number",
+      "required": true
+    },
+    "payPrice": {
+      "type": "number",
+      "required": true
+    },
+    "creditPrice": {
+      "type": "number",
+      "default": 0
+    },
+    "status": {
+      "type": "string",
+      "enum": ["wait", "paid"],
+      "default": "wait"
+    },
+    "deleteInvoice": {
+      "type": "boolean",
+      "default": false
+    },
+    "userId": {
+      "required": true
+    },
+    "gatewayId": {
+      "required": true
+    },
+    "orderId": {
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "AppUser",
+      "foreignKey": "userId"
+    },
+    "gateway": {
+      "type": "belongsTo",
+      "model": "PayGateway",
+      "foreignKey": "gatewayId"
+    },
+    "order": {
+      "type": "belongsTo",
+      "model": "Order",
+      "foreignKey": "orderId"
+    },
+    "store": {
+      "type": "belongsTo",
+      "model": "Store",
+      "foreignKey": "storeId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

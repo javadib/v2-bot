@@ -1,0 +1,37 @@
+{
+  "name": "ConfirmResult",
+  "base": "Model",
+  "strict": true,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "hidden": [
+    "id"
+  ],
+  "properties": {
+    "orderId": {
+      "type": "string",
+      "required": true
+    },
+    "lastStatus": {
+      "type": "number",
+      "required": true
+    },
+    "lastStatusTitle": {
+      "type": "string"
+    },
+    "paymentUrl": {
+      "type": "string",
+      "required": true
+    },
+    "paid": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

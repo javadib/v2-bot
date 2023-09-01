@@ -1,0 +1,150 @@
+{
+  "name": "StoreCategory",
+  "base": "BaseModel",
+  "strict": true,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Upload2": [
+      {
+        "methodName": [
+          "create",
+          "updateAttribute"
+        ],
+        "storage": "storage",
+        "model": "StoreCategory",
+        "value": "{default}",
+        "renameTo": "@hash",
+        "fields": {
+          "iconUrl":  true,
+          "indexImage":  true,
+          "headerImage":  true
+        }
+      }
+    ],
+    "FullUrl": {
+      "appSettingsKey": "baseUrl",
+      "fields": {
+        "iconUrl":  true,
+        "indexImage":  true,
+        "headerImage":  true
+      }
+    },
+    "ReadOnly": {
+      "isActive": true
+    },
+    "UniqueHandle": {
+      "create": {
+        "modelName": "StoreCategory",
+        "keyName": "نام"
+      }
+    }
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "displayName": "نام",
+      "required": true,
+      "index": {"unique": true},
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "displayName": "توضیحات",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "iconClass": {
+      "type": "string",
+      "displayName": "آیکون",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "iconUrl": {
+      "type": "string",
+      "displayName": "آیکون شاخص",
+      "required": false,
+      "default": "/images/lbc/default.png",
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "indexImage": {
+      "type": "string",
+      "displayName": "تصویر شاخص",
+      "required": false,
+      "default": "/images/storeCategory.png",
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "headerImage": {
+      "type": "string",
+      "displayName": "تصویر سربرگ",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "isActive": {
+      "type": "boolean",
+      "displayName": "فعال شده",
+      "default": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "parent": {
+      "type": "belongsTo",
+      "model": "StoreCategory",
+      "foreignKey": "parentId"
+    },
+    "childes": {
+      "type": "hasMany",
+      "model": "StoreCategory",
+      "foreignKey": "parentId"
+    },
+    "stores": {
+      "type": "hasMany",
+      "model": "Store",
+      "foreignKey": "storeCatId"
+    }
+  },
+  "acls": [],
+  "methods": {},
+  "scopes": {
+    "actives": {"where": {"isActive": true}}
+  }
+}

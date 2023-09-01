@@ -1,0 +1,17 @@
+{
+  "data": [
+    {
+      "name": "زرین پال",
+      "code": "zarinpal",
+      "username": "",
+      "password": "05399cec-880b-11e9-9568-000c29344814",
+      "moduleFileName": "./payment/zarinpal/index.js",
+      "iconUrl": "/images/modules/bitpay-logo.png",
+      "className": "far fa-cc-stripe",
+      "description": "درگاه واسط زرین پال",
+      "testMode": true,
+      "voucherBased": false,
+      "isActive": true
+    }
+  ]
+}

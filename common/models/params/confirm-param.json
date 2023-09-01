@@ -1,0 +1,32 @@
+{
+  "name": "ConfirmParam",
+  "base": "Model",
+  "strict": true,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "hidden": [
+    "id"
+  ],
+  "properties": {
+    "reduceCredit": {
+      "type": "boolean",
+      "required": false,
+      "default": false
+    },
+    "gatewayId": {
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "gateway": {
+      "type": "belongsTo",
+      "model": "PayGateway",
+      "foreignKey": "gatewayId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

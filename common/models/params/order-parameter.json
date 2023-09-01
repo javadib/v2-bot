@@ -1,0 +1,53 @@
+{
+  "name": "OrderParameter",
+  "base": "Model",
+  "strict": true,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "hidden": [
+    "id",
+    "couponCode"
+  ],
+  "properties": {
+    "items": {
+      "type": ["OrderDetail"],
+      "required": {
+        "message": "error.model.prop.oneRequiredAtLeast"
+      }
+    },
+    "receiverEmail": {
+      "type": "string",
+      "required": false
+    },
+    "couponCode": {
+      "type": "string",
+      "required": false
+    },
+    "description": {
+      "type": "string",
+      "required": false
+    },
+    "addressId": {
+      "required": {
+        "message": "error.model.prop.required"
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "gateway": {
+      "type": "belongsTo",
+      "model": "PayGateway",
+      "foreignKey": "gatewayId"
+    },
+    "address": {
+      "type": "belongsTo",
+      "model": "Address",
+      "foreignKey": "addressId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

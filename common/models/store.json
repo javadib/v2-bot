@@ -1,0 +1,204 @@
+{
+  "name": "Store",
+  "base": "BaseModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "Activation": {},
+    "ReadOnly2": {
+      "remoteMethods": true
+    },
+    "Upload2": [
+      {
+        "methodName": [
+          "create",
+          "updateAttribute"
+        ],
+        "storage": "storage",
+        "model": "Store",
+        "value": "{default}",
+        "renameTo": "@hash",
+        "fields": {
+          "headerImage": true,
+          "logoUrl": true
+        }
+      },
+      {
+        "methodName": [
+          "prototype.__create__products",
+          "prototype.__updateById__products"
+        ],
+        "storage": "storage",
+        "model": "Product",
+        "value": "{default}",
+        "renameTo": "@hash",
+        "fields": {
+          "images": {
+            "isArray": true
+          }
+        }
+      }
+    ],
+    "FullUrl": {
+      "appSettingsKey": "baseUrl",
+      "fields": {
+        "headerImage": true,
+        "logoUrl": true
+      }
+    },
+    "ReadOnly": {
+      "isActive": true
+    }
+  },
+  "properties": {
+    "title": {
+      "type": "string",
+      "displayName": "عنوان",
+      "required": true,
+      "index": true,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "headerImage": {
+      "type": "string",
+      "default": "/images/default_headerImage.png",
+      "displayName": "تصویر شاخص",
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "logoUrl": {
+      "type": "string",
+      "displayName": "آدرس لوگو",
+      "default": "/images/default_store_logo.png",
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "phone": {
+      "type": "string",
+      "required": false,
+      "displayName": "تلفن",
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "mobile": {
+      "type": "string",
+      "required": false,
+      "displayName": "موبایل",
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "instagram": {
+      "type": "string",
+      "displayName": "اینستاگرام",
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "fixedShippingPrice": {
+      "type": "number",
+      "required": false,
+      "default": 0,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "number"
+        }
+      }
+    },
+    "description": {
+      "type": "string",
+      "displayName": "توضیحات",
+      "required": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    },
+    "isActive": {
+      "type": "boolean",
+      "displayName": "فعال شده",
+      "default": false,
+      "display": {
+        "autoGenerateField": true,
+        "autoGenerateFilter": {
+          "UI": "text"
+        }
+      }
+    }
+  },
+  "validations": [],
+  "relations": {
+    "owner": {
+      "type": "belongsTo",
+      "model": "AppUser",
+      "foreignKey": "userId"
+    },
+    "address": {
+      "type": "belongsTo",
+      "model": "Address",
+      "foreignKey": "addressId"
+    },
+    "bankAccount": {
+      "type": "belongsTo",
+      "model": "BankAccount",
+      "foreignKey": "bankAccId"
+    },
+    "statistic": {
+      "type": "hasOne",
+      "model": "BusinessStatistic",
+      "foreignKey": "storeId"
+    },
+    "orders": {
+      "type": "hasMany",
+      "model": "Order",
+      "foreignKey": "storeId"
+    },
+    "products": {
+      "type": "hasMany",
+      "model": "Product",
+      "foreignKey": "storeId"
+    },
+    "tickets": {
+      "type": "hasMany",
+      "model": "Ticket",
+      "foreignKey": "storeId"
+    }
+  },
+  "acls": [],
+  "methods": {},
+  "scopes": {
+    "actives": {
+      "where": {
+        "isActive": true
+      }
+    }
+  }
+}

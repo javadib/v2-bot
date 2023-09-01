@@ -1,0 +1,55 @@
+{
+  "name": "OrderDetail",
+  "base": "BaseModel",
+  "strict": true,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins":{
+    "ReadOnly2": {
+      "remoteMethods": true,
+      "totalPrice": true,
+      "fakeTotalPrice": true
+    },
+    "Computed2": {
+      "properties": {
+
+      }
+    }
+  },
+  "hidden": [],
+  "properties": {
+    "unitPrice": {
+      "type": "number",
+      "required": true
+    },
+    "quantity": {
+      "type": "number",
+      "default": 1
+    },
+    "discount": {
+      "type": "number",
+      "default": 0
+    },
+    "totalPrice": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "product": {
+      "type": "belongsTo",
+      "model": "Product",
+      "foreignKey": "productId"
+    },
+    "order": {
+      "type": "belongsTo",
+      "model": "Order",
+      "foreignKey": "orderId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,86 @@
+{
+  "name": "Payment",
+  "base": "BaseModel",
+  "strict": true,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "ReadOnly2": {
+      "remoteMethods": true,
+      "status": true
+    }
+  },
+  "properties": {
+    "totalPrice": {
+      "type": "number",
+      "required": true
+    },
+    "payType": {
+      "type": "number",
+      "default": 0,
+      "enum": [
+        "income",
+        "expense"
+      ]
+    },
+    "payMethod": {
+      "type": "number",
+      "default": 0,
+      "enum": [
+        "online",
+        "credit",
+        "pos",
+        "cash",
+        "ussd",
+        "system"
+      ]
+    },
+    "reference": {
+      "type": "string"
+    },
+    "gatewayPayUrl": {
+      "type": "string"
+    },
+    "additionalData": {
+      "type": "object"
+    },
+    "description": {
+      "type": "string"
+    },
+    "canMoneyBack": {
+      "type": "boolean",
+      "default": false
+    },
+    "status": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "user": {
+      "type": "belongsTo",
+      "model": "AppUser",
+      "foreignKey": "userId"
+    },
+    "gateway": {
+      "type": "belongsTo",
+      "model": "PayGateway",
+      "foreignKey": "gatewayId"
+    },
+    "order": {
+      "type": "belongsTo",
+      "model": "Order",
+      "foreignKey": "orderId"
+    },
+    "store": {
+      "type": "belongsTo",
+      "model": "Store",
+      "foreignKey": "storeId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

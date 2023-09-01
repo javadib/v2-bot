@@ -1,0 +1,53 @@
+{
+  "name": "TicketReply",
+  "base": "BaseModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "ReadOnly2": {
+      "remoteMethods": true,
+      "userReplied": true
+    }
+  },
+  "properties": {
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "userReplied": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "ticket": {
+      "type": "belongsTo",
+      "model": "Ticket",
+      "foreignKey": "ticketId"
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "AppUser",
+      "foreignKey": "userId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "supervisor",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}
