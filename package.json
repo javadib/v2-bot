@@ -1,5 +1,5 @@
 {
-  "name": "xBot",
+  "name": "x-bot",
   "version": "1.0.0",
   "main": "server/server.js",
   "engines": {
@@ -45,5 +45,5 @@
     "url": ""
   },
   "license": "UNLICENSED",
-  "description": "xBot"
+  "description": "High performance accounting and notification system for X-Ray"
 }
