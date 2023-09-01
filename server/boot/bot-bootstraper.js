@@ -3,8 +3,6 @@
 const fs = require('fs');
 const botHandler = require('../../common/modules/bot-handler');
 const tlg = require('../../common/modules/socials/tlg-client');
-const bale = require('../../common/modules/socials/bale-client');
-const torob = require('../../common/modules/ecommece/torob-crawler');
 const axios = require("axios");
 const path = require("path");
 
