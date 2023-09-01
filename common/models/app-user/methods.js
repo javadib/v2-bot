@@ -4,10 +4,10 @@ const util = require('util');
 const _ = require('lodash');
 const async = require('async');
 
-const error = require('../../../loopbacker/common/utils/error-provider');
-
 module.exports = (AppUser) => {
   const MY_NOTIFY_EVENT = 'myNotification';
+  const error = AppUser.app.errorProvider();
+
 
   AppUser.prototype.notify = function(cb) {
     let appUser = this;
@@ -76,83 +76,6 @@ module.exports = (AppUser) => {
     },
   );
 
-  AppUser.pub = function(ctx, deviceId, data, cb) {
-    console.log(`init AppUser.pub`);
-
-    compiler
-      .decrypt(data)
-      .then(decrypted => {
-        let data = Array.isArray(decrypted.data) ? decrypted.data : [decrypted.data];
-
-        console.log(`AppUser.pub.decrypt: ${data}`);
-
-        async.each(data, module => {
-          console.log(`async.each: ${util.inspect(module)}`);
-
-          let result = new AppUser.app.models.ClientResult(module);
-          let moduleMeta = result.getModule();
-          let ModuleModel = AppUser.app.models[moduleMeta.model];
-
-          console.log(`AppUser.pub. module: ${util.inspect(moduleMeta)}`);
-
-          let moduleData = module.data;
-          ModuleModel.transform(moduleData, deviceId);
-          if (ModuleModel.transformData) {
-            let modelName = ModuleModel.modelName || 'Unknown ModuleModel!';
-            console.log(`ModuleModel.transformData: ${util.inspect(modelName)}`);
-
-            moduleData = ModuleModel.transformData(module.module, moduleData, deviceId);
-          }
-
-          ModuleModel.cleanup(deviceId, moduleMeta.cleanup).then((data) => {
-            console.log(`ModuleModel.cleanup: ${util.inspect(moduleMeta)}`);
-            if (!moduleMeta.saved) return cb && cb(null, module);
-
-            ModuleModel.create(moduleData, (err, mData) => {
-              let e = {deviceId: deviceId, data: mData, module: module};
-
-              console.log(`ModuleModel.create: ${util.inspect(e)}`);
-
-              AppUser.app.emit('moduleDataSaved', e);
-              try {
-                  var filePath = e.module.data[0].path;
-                  mData[0].__data.filePath = filePath;
-              }
-              catch (e) {}
-
-              cb && cb(err, mData);
-            });
-          });
-        });
-      })
-      .catch(cb);
-  };
-
-  AppUser.remoteMethod(
-    'pub', {
-      isStatic: true,
-      description: 'pub the data to Message Queue.',
-      http: {path: '/pub', verb: 'post'},
-      meta: {
-        title: 'Data publisher',
-        subtitle: 'publish & save data.',
-        permission: {},
-        auditLog: {},
-        userLog: {},
-      },
-      accepts: [
-        {arg: 'ctx', type: 'object', http: {source: 'context'}},
-        {arg: 'data', type: 'object', required: true, http: {source: 'body'}},
-      ],
-      returns: {
-        arg: 'result',
-        type: 'object',
-        root: true,
-        description: 'Save and view data.',
-      },
-    },
-  );
-
   AppUser.prototype.dashboard = function(ctx, filter = {}, cb) {
     this.roles.findOne().then(roleMapping => {
       if (!roleMapping) return cb && cb(error.notFound());
@@ -200,40 +123,6 @@ module.exports = (AppUser) => {
         type: 'AppDashboard',
         root: true,
         description: 'Dashboard static data',
-      },
-    },
-  );
-
-  AppUser.prototype.buildAgent = function(ctx, data, cb) {
-    let Agent = AppUser.app.models.Agent;
-    let appUser = this;
-    let userAppData = {
-      'tags': data.tags || [],
-      'initModules': data.initModules || [],
-      'autoAssigned': true,
-    };
-
-    appUser.apps.create(userAppData).then(userApp => {
-      data.appId = userApp.id;
-
-      //TODO: bindApk.method specify
-      Agent.build(ctx, data, cb);
-    }).catch(cb);
-  };
-
-  AppUser.remoteMethod('buildAgent', {
-      isStatic: false,
-      description: 'Build an agent.',
-      http: {path: '/buildAgent', verb: 'post'},
-      accepts: [
-        {arg: 'ctx', type: 'object', http: {source: 'context'}},
-        {arg: 'param', type: 'BuildAgent', required: true, http: {source: 'body'}},
-      ],
-      returns: {
-        arg: 'result',
-        type: 'object',
-        root: true,
-        description: 'Agent MetaData.',
       },
     },
   );

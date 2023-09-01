@@ -1,7 +1,7 @@
 {
   "name": "AppUser",
   "base": "BaseUser",
-  "strict": false,
+  "strict": true,
   "idInjection": false,
   "options": {
     "ttl": 1800000,
@@ -162,7 +162,7 @@
     },
     "username": {
       "type": "string",
-      "required": false,
+      "required": true,
       "crud": {"c":  true, "u": false},
       "display": {
         "autoGenerateField": true,
@@ -205,7 +205,7 @@
     "isActive": {
       "type": "boolean",
       "required": false,
-      "default": false,
+      "default": true,
       "display": {
         "autoGenerateField": true,
         "autoGenerateFilter": {
