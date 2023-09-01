@@ -1,0 +1,92 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "../common/models/params",
+      "../loopbacker/src/common/models",
+      "../loopbacker/src/common/models/params",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../loopbacker/src/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "db",
+    "public": false
+  },
+  "AccessToken": {
+    "dataSource": "db",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "db",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "db",
+    "public": false
+  },
+  "Credential": {
+    "dataSource": "db",
+    "public": false
+  },
+  "AppOrg": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "AppPublisher": {
+    "dataSource": "db",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "AppUser": {
+    "dataSource": "db",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "AppSetting": {
+    "dataSource": "db",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Command": {
+    "dataSource": "db",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "SocialUser": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "SocialSession": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  },
+  "Vendor": {
+    "dataSource": "db",
+    "public": false,
+    "$promise": {},
+    "$resolved": true
+  }
+}
