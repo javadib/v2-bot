@@ -1,4 +1,4 @@
-const error = require("../../loopbacker/src/common/utils/error-provider");
+const error = require("../../loopbacker/common/utils/error-provider");
 
 module.exports = function() {
   let logger = false;

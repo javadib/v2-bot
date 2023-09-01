@@ -5,14 +5,14 @@
       "loopback/server/models",
       "../common/models",
       "../common/models/params",
-      "../loopbacker/src/common/models",
-      "../loopbacker/src/common/models/params",
+      "../loopbacker/common/models",
+      "../loopbacker/common/models/params",
       "./models"
     ],
     "mixins": [
       "loopback/common/mixins",
       "loopback/server/mixins",
-      "../loopbacker/src/server/mixins",
+      "../loopbacker/server/mixins",
       "../common/mixins",
       "./mixins"
     ]

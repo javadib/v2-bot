@@ -17,6 +17,6 @@ module.exports = function (app) {
   };
 
   app.errorProvider = function() {
-    return require('../../loopbacker/src/common/utils/error-provider');
+    return require('../../loopbacker/common/utils/error-provider');
   };
 };
