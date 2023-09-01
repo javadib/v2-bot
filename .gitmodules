@@ -1,0 +1,3 @@
+[submodule "loopbacker"]
+	path = loopbacker
+	url = https://github.com/javadib/loopbacker.git
