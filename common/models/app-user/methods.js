@@ -6,10 +6,10 @@ const async = require('async');
 
 module.exports = (AppUser) => {
   const MY_NOTIFY_EVENT = 'myNotification';
-  const error = AppUser.app.errorProvider();
+  const error = () => AppUser.app.errorProvider();
 
 
-  AppUser.prototype.notify = function(cb) {
+  AppUser.prototype.notify = function (cb) {
     let appUser = this;
     let socket = AppUser.app.io;
 
@@ -29,7 +29,7 @@ module.exports = (AppUser) => {
    * @callback {Function(err, AppUser)} callback - the result is AppUser registered
    * @constructor
    */
-  AppUser.createUser = function(ctx, user, cb) {
+  AppUser.createUser = function (ctx, user, cb) {
     let roleName = ctx.req.body.roleName;
 
     if (!roleName) return cb(error.validateError('roleName must be specific.', {code: 'ROLE_NAME_REQUIRED'}));
@@ -76,7 +76,7 @@ module.exports = (AppUser) => {
     },
   );
 
-  AppUser.prototype.dashboard = function(ctx, filter = {}, cb) {
+  AppUser.prototype.dashboard = function (ctx, filter = {}, cb) {
     this.roles.findOne().then(roleMapping => {
       if (!roleMapping) return cb && cb(error.notFound());
 
@@ -87,7 +87,7 @@ module.exports = (AppUser) => {
         });
         let transform = _.chain(roleDashes)
           .groupBy(p => p.__data.dashboard.__data.tag)
-          .map(function(item, key) {
+          .map(function (item, key) {
             return {key: key, items: item};
           })
           .value();

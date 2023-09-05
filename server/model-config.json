@@ -85,19 +85,19 @@
   },
   "Faq": {
     "dataSource": "db",
-    "public": false,
+    "public": true,
     "$promise": {},
     "$resolved": true
   },
   "FaqCategory": {
     "dataSource": "db",
-    "public": false,
+    "public": true,
     "$promise": {},
     "$resolved": true
   },
   "Invoice": {
     "dataSource": "db",
-    "public": false,
+    "public": true,
     "$promise": {},
     "$resolved": true
   },
@@ -109,37 +109,37 @@
   },
   "Order": {
     "dataSource": "db",
-    "public": false,
+    "public": true,
     "$promise": {},
     "$resolved": true
   },
   "OrderDetail": {
     "dataSource": "db",
-    "public": false,
+    "public": true,
     "$promise": {},
     "$resolved": true
   },
   "PayGateway": {
     "dataSource": "db",
-    "public": false,
+    "public": true,
     "$promise": {},
     "$resolved": true
   },
   "Payment": {
     "dataSource": "db",
-    "public": false,
+    "public": true,
     "$promise": {},
     "$resolved": true
   },
   "Product": {
     "dataSource": "db",
-    "public": false,
+    "public": true,
     "$promise": {},
     "$resolved": true
   },
   "ProductCategory": {
     "dataSource": "db",
-    "public": false,
+    "public": true,
     "$promise": {},
     "$resolved": true
   },
@@ -157,13 +157,13 @@
   },
   "Ticket": {
     "dataSource": "db",
-    "public": false,
+    "public": true,
     "$promise": {},
     "$resolved": true
   },
   "TicketReply": {
     "dataSource": "db",
-    "public": false,
+    "public": true,
     "$promise": {},
     "$resolved": true
   }
